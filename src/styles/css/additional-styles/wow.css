@@ -1,0 +1,283 @@
+html{
+    background-color: #120c0c !important;
+    background-image: url('/assets/bg/bg-cata.jpg');
+    background-position: center top 0px;
+    background-repeat: no-repeat;
+    scrollbar-width: none;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
+
+.wow-navbar {
+    position: sticky;
+    top: 7px;
+    width: auto;
+    border-radius: 12px;
+    background: rgb(40 22 14 / 57%);
+    -webkit-backdrop-filter: blur(21px);
+    backdrop-filter: blur(21px);
+    margin: 1rem auto;
+}
+
+li .tap-highlight-transparent {
+    font-size: 17px;
+    font-weight: 600;
+    color: #e3e3e3;
+}
+
+div .transition-transform-colors-opacity {
+    background-color: rgb(255 255 255 / 12%);
+    color: #f2f2f2;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+li .transition-transform-colors-opacity {
+    background-color: rgb(0 0 0 / 79%);
+    padding: 0 27px;
+}
+
+li .hover\:text-danger:hover {
+    color: #fff;
+    background-color: rgb(255 255 255 / 25%);
+}
+
+li .text-warning {
+    color: #fff;
+    background-color: #ac1e1e;
+}
+
+li .hover\:text-warning:hover {
+    color: #fff;
+    background-color: #b42323;
+}
+
+.w-full .flex-nowrap .whitespace-nowrap .text-inherit {
+    padding-right: 2rem;
+    color: #ff2929;
+    display: none;
+}
+
+.bg-content1 {
+    background-color: #14100e;
+    color: #EBDEC2;
+    border-radius: 12px;
+    border: 1px solid transparent !important;
+}
+
+.bg-content1 .text-small {
+    color: #fff;
+}
+
+.bg-content1 .text-tiny {
+    color: #EBDEC2 !important;
+}
+
+.bg-content1 .data-\[hover\=true\]\:bg-default[data-hover=true] {
+    background-color: rgba(76, 61, 53, .74);
+}
+
+.status-server .card {
+    background-color: #16120f;
+    background-image: url('/assets/bg/status-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: .75rem;
+    border: 1px solid rgb(62 47 35);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    color: #EBDEC2;
+}
+
+.status-server .card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.status-server .card-void {
+    height: 33px;
+}
+
+.status-server .card-footer {
+    padding: 1rem 1.25rem;
+    background-color: #121212;
+    border-top: 1px solid rgba(0, 0, 0, .125);
+}
+
+.status-server .bluer {
+    background: rgb(16 11 11 / 35%);
+    -webkit-backdrop-filter: blur(21px);
+    backdrop-filter: blur(21px);
+}
+
+.status-server .card-footer:last-child {
+    border-radius: 0 0 calc(.76rem - 1px) calc(.76rem - 1px);
+}
+
+.status-server .card-footer .color-red {
+    color: #c52424 !important;
+}
+
+.status-server .online-border {
+    background-color: #0c0907;
+    padding: .55rem;
+    border-radius: 1rem;
+    min-width: 105px;
+    max-width: 125px;
+}
+
+.status-server .card-footer .footer-text {
+    font-size: .875rem;
+    color: #f4f4f4;
+}
+
+.status-server .card-footer .footer-text span {
+    color: #EBDEC2;
+}
+
+.status-server h1 {
+    color: #f4f4f4;
+    font-size: 2.55rem;
+    line-height: 1;
+    text-transform: uppercase;
+    margin: 0 !important;
+}
+
+.status-server h1 span {
+    font-size: 2.25rem;
+}
+
+.status-server h5 {
+    color: #f4f4f4;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    margin: 0 !important;
+}
+
+.status-server .mt-1 {
+    margin-top: .5rem !important;
+}
+
+.status-server .mt-2 {
+    margin-top: 1rem !important;
+}
+
+.status-server .mb-1 {
+    margin-bottom: .5rem !important;
+}
+
+.status-server .mb-2 {
+    margin-bottom: 1rem !important;
+}
+
+.status-server .mb-3 {
+    margin-bottom: 1.33rem !important;
+}
+
+.status-server .mb-4 {
+    margin-bottom: 2rem !important;
+}
+
+.status-server .media {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.status-server .media-body {
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.align-self-center {
+    align-self: center !important;
+}
+
+.status-server .status-dot {
+    margin-top: 4px;
+}
+
+.wow-news-right-line {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.wow-news-article-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wow-news-image {
+    position: relative;
+    margin-right: 20px;
+}
+
+.wow-news-article-image-width {
+    width: 140px;
+    height: 120px;
+    border-radius: 15%;
+}
+
+.shadow-small form .justify-end {
+    justify-content: center;
+}
+
+form .checkBox .tap-highlight-transparent {
+    background: transparent;
+}
+
+form .checkBox .before\:border-default:before {
+    border-color: hsl(36deg 35.57% 25.71%);
+}
+
+form .checkBox .before:hover {
+    background: #0c0a07;
+}
+
+form .checkBox  .after\:bg-primary::after {
+    background-color: hsl(36deg 35.57% 25.71%);
+}
+
+
+@media (min-width: 640px) {
+    .wow-bg-background .justify-between  {
+        max-width: 100%;
+    }
+}
+
+.shadow-small form .font-semibold {
+    font-weight: 600;
+    color: #fff;
+}
+
+.wow-input-bg-color {
+    background-color: #0c0a07 !important;
+}
+
+.testInput {
+    color: #fff  !important;
+}
+
+.wow-input-text-color {
+    color: rgb(235 222 194) !important;
+}
+
+.custom-spinner {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #FF4500;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}

@@ -1,0 +1,6 @@
+{
+  "baseUrlAPI": "https://api.warhoop.su/",
+  "AoWow": {
+    "BaseUrlBD": "https://db.warhoop.su/"
+  }
+}
