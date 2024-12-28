@@ -1,4 +1,3 @@
-# Grimoire-ui
 # EN: Project Description
 
 ![Demo Image](demo.png)
