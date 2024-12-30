@@ -4,7 +4,7 @@ export default function Footer() {
             <div className="w-full mx-auto max-w-screen-xl pb-4 md:flex md:items-center md:justify-between">
              <span className="text-sm text-customTXT sm:text-center dark:text-gray-400">
                 © 2025
-               <a href="https://warhoop.su/" className="hover:underline"> Grimoire™</a>. All Rights Reserved.
+               <a href="https://warhoop.su/" className="hover:underline"> Warhoop™</a>. All Rights Reserved.
              </span>
                 <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-white dark:text-gray-400 sm:mt-0">
                     <li>
