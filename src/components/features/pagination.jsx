@@ -1,4 +1,5 @@
 import {useTranslation} from "react-i18next";
+import {Button} from "@nextui-org/react";
 
 export default function Pagination({props, showNavigationButtons = true}) {
     const {t} = useTranslation();
@@ -30,45 +31,60 @@ export default function Pagination({props, showNavigationButtons = true}) {
         pages = pages.concat(withDots(props.totalPage, ['...', props.totalPage]))
     }
 
-    return (<div>
-        <nav className="flex justify-between" role="navigation" aria-label="Navigation">
-            {showNavigationButtons && (<div className="flex-1 mr-2">
-                <button
-                    onClick={() => props.currentPage > 1 && props.watchPage(props.currentPage - 1)}
-                    className={`btn bg-white border-slate-200 hover:border-slate-300 ${props.currentPage > 1 ? 'text-indigo-500' : 'disabled text-indigo-100'}`}
-                    style={props.currentPage > 1 ? {} : {cursor: 'not-allowed'}}
-                >
-                    &lt;-
-                    <span className="hidden sm:inline">&nbsp;{t("Pagination.Previous")}</span>
-                </button>
-            </div>)}
-            <div className="grow text-center">
-                <ul className="inline-flex text-sm font-medium space-x-1">
-                    {pages.map((element, index) => element === "..." ? <li key={index}>
-                        <span
-                            className="inline-flex items-center justify-center leading-5 px-2 py-2 text-slate-400 rounded">…</span>
-                    </li> : element === props.currentPage ? <li key={index}>
-                                        <span
-                                            className={`inline-flex items-center justify-center ${showNavigationButtons ? 'rounded-full' : 'rounded-md'} leading-5 px-2 py-2 bg-white border border-slate-200 text-indigo-500 shadow-sm`}>
-                                            <span className="w-5">{element}</span></span>
-                    </li> : <li key={index}>
-                        <button
-                            onClick={() => props.watchPage(element)}
-                            className={`inline-flex text-center ${element === props.totalPage ? "" : "justify-center"} rounded-full leading-5 px-2 py-2  text-slate-600 hover:text-indigo-500 border border-transparent`}>
-                            <span className="w-5">{element}</span></button>
-                    </li>)}
-                </ul>
-            </div>
-            {showNavigationButtons && (<div className="flex-1 text-right ml-2">
-                <button
-                    onClick={() => props.currentPage < props.totalPage && props.watchPage(props.currentPage + 1)}
-                    className={`btn bg-white border-slate-200 hover:border-slate-300 ${props.currentPage === props.totalPage ? 'disabled text-indigo-100' : 'text-indigo-500'}`}
-                    style={props.currentPage === props.totalPage ? {cursor: 'not-allowed'} : {}}>
-        <span className="hidden sm:inline">
-            {t("Pagination.Next")}&nbsp;
-        </span>-&gt;
-                </button>
-            </div>)}
-        </nav>
-    </div>);
+    return (
+        <div>
+            {props.loading ? (<></>) : (
+                <nav className="flex justify-center">
+                    {showNavigationButtons && props.currentPage > 1 && (
+                        <div className="mr-2">
+                            <Button
+                                onPress={() => props.watchPage(props.currentPage - 1)}
+                                className="btn bg-black text-indigo-500"
+                            >
+                                <span className="hidden sm:inline">{t("Pagination.Previous")}</span>
+                            </Button>
+                        </div>
+                    )}
+
+                    <div className="grow text-center">
+                        <ul className="inline-flex text-sm font-medium space-x-1">
+                            {pages.map((element, index) => (
+                                element === "..." ? (
+                                    <li key={index}>
+                                        <span className="inline-flex items-center justify-center leading-5 px-2 py-2 text-slate-400">…</span>
+                                    </li>
+                                ) : element === props.currentPage ? (
+                                    <li key={index}>
+                                    <span className="inline-flex items-center justify-center rounded-md leading-5 px-2 py-2 bg-customBg hover:bg-customBg text-white shadow-sm">
+                                        <span className="w-5">{element}</span>
+                                    </span>
+                                    </li>
+                                ) : (
+                                    <li key={index}>
+                                        <button
+                                            onClick={() => props.watchPage(element)}
+                                            className="inline-flex text-center justify-center rounded-full leading-5 px-2 py-2 text-slate-600 hover:text-white border border-transparent">
+                                            <span className="w-5">{element}</span>
+                                        </button>
+                                    </li>
+                                )
+                            ))}
+                        </ul>
+                    </div>
+
+                    {showNavigationButtons && props.currentPage < props.totalPage && (
+                        <div className="ml-2">
+                            <Button
+                                onPress={() => props.watchPage(props.currentPage + 1)}
+                                className="btn bg-white border-slate-200 hover:border-slate-300 text-indigo-500"
+                            >
+                                <span className="hidden sm:inline">{t("Pagination.Next")}</span>
+                            </Button>
+                        </div>
+                    )}
+                </nav>
+            )}
+        </div>
+    );
+
 }

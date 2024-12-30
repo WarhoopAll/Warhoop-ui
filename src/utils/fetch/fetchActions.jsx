@@ -17,9 +17,10 @@ export const CheckSession = async () => {
     return await GET({url: 'auth/session'});
 };
 // News
-export const GetNews = async () => {
-    return await GET({url: `news`});
+export const GetNews = async (limit = 2, offset = 0) => {
+    return await GET({ url: `news?limit=${limit}&offset=${offset}` });
 };
+
 
 export const GetNewsByID = async (newsId) => {
     return await GET({url: `news/${newsId}`});

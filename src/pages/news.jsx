@@ -15,12 +15,10 @@ export default function News() {
     const {id} = useParams();
     const newsId = parseInt(id, 10);
     const [newComment, setNewComment] = useState("");
-    const [error, setError] = useState("");
 
     const handleCommentChange = (e) => {
         const sanitizedComment = DOMPurify.sanitize(e.target.value);
         setNewComment(sanitizedComment);
-        setError("");
     };
 
     const handleCommentSubmit = async (e) => {
@@ -149,7 +147,7 @@ export default function News() {
             {isLoading ? (<div className="flex justify-center items-center my-10">
                     <div className="custom-spinner"></div>
                 </div>) : (<div className="p-4 shadow-lg">
-                    <h1 className="text-2xl md:text-3xl text-customTXT font-bold">
+                    <h1 className="text-2xl md:text-3xl text-white font-bold">
                         {data?.title}
                     </h1>
                     <div className="flex flex-wrap mt-4">
@@ -175,7 +173,7 @@ export default function News() {
 
                     </div>
                     <div
-                        className="mt-8"
+                        className="mt-8 text-customTXT"
                         dangerouslySetInnerHTML={{__html: data?.text}}
                     ></div>
                     <div className="mt-8">
@@ -332,13 +330,6 @@ export default function News() {
                                         </div>)}
                                 </li>))}
                         </ul>
-
-                        {(data.comments || []).length > commentsLimit && (<button
-                                onClick={loadMoreComments}
-                                className="mt-4  bg-[#e55454] text-white py-2 px-4 rounded-md hover:bg-[#ff6666] transition"
-                            >
-                                Load More Comments
-                            </button>)}
                     </div>
 
                 </div>)}

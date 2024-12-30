@@ -1,26 +1,26 @@
 import {useEffect, useState} from 'react';
 import Layout from "@/layouts/layout";
-import NewsMin from "@/partials/news/newsMin";
-import Pagination from "@/components/features/pagination";
 import {GetNews} from "@/utils/fetch/fetchActions";
+import NewsCardList from "@/partials/news/newsCardList";
 
 export default function Home() {
     const [articles, setArticles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
     const [loading, setLoading] = useState(false);
-
+    const limit = 2;
     const fetchData = async () => {
         setLoading(true);
+        let offset = (currentPage * limit) - limit;
 
         try {
-            const response = await GetNews();
+            const response = await GetNews(limit, offset);
             const data = await response.json();
+            const url = `news?limit=${limit}&offset=${offset}`;
 
             setArticles(data?.data || []);
-            setTotalPage(data?.totalPage || 1);
+            setTotalPage(Math.ceil(data?.total / limit));
         } catch (error) {
-            console.error("Error loading news:", error);
         } finally {
             setLoading(false);
         }
@@ -40,7 +40,6 @@ export default function Home() {
         footer={true}>
         {loading ? (<div className="flex justify-center items-center my-10">
             <div className="custom-spinner"></div>
-        </div>) : (<NewsMin props={{currentPage, articles}}/>)}
-        {!totalPage > 1 && (<Pagination props={{watchPage, totalPage, currentPage}}/>)}
+        </div>) : (<NewsCardList props={{currentPage, totalPage, watchPage, loading , articles}}/>)}
     </Layout>);
 }

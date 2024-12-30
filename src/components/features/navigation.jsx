@@ -133,25 +133,28 @@ export default function Navigation() {
                                                 setIsDropdownOpen(false);
                                             }
                                         }}
-                                        name={session?.account_username}
+                                        className="text-white"
+                                        name={session?.profile?.name}
                                         description={t(session?.account_permissions)}
                                         avatarProps={{
-                                            src: session?.account_avatar_url || '/assets/avatar/default.png',
+                                            src: session?.profile?.avatar || '/assets/avatar/default.png',
                                         }}
                                     ></User>
                                 </DropdownTrigger>
                                 <DropdownMenu aria-label="Profiles" variant="flat">
-                                    <DropdownItem isDisabled key="profile" className="h-11 mb-2" textValue="Profile">
-                                        <p className="font-semibold">{t("Coins")}: <span
-                                            className="font-semibold">{session?.coins}</span></p>
-                                    </DropdownItem>
+                                    {session?.coins > 0 && (
+                                        <DropdownItem isDisabled key="profile" className="h-11 mb-2" textValue="Profile">
+                                            <p className="font-semibold">
+                                                {t("Coins")}: <span className="font-semibold">{session?.coins}</span>
+                                            </p>
+                                        </DropdownItem>
+                                    )}
                                     <DropdownItem className="h-11 mb-2" key="settings"
                                                   href="/account/panel">{t("Menu.UserPanel")}</DropdownItem>
-                                    {session?.account_level >= 2 && (
-                                        <DropdownItem key="admins" href="/admin">{t("Menu.AdminPanel")}</DropdownItem>
+                                    {session?.access?.security_level >= 2 && (
+                                        <DropdownItem className="h-11 mb-2" key="admins" href="/admin">{t("Menu.AdminPanel")}</DropdownItem>
                                     )}
-                                    <DropdownItem key="logout" color="danger" onPress={handleLogout}
-                                                  className="bg-danger-50">
+                                    <DropdownItem key="logout" onPress={handleLogout} >
                                         {t("Menu.SignOut")}
                                     </DropdownItem>
                                 </DropdownMenu>
