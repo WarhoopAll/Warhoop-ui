@@ -32,12 +32,9 @@ export default function Home() {
         setCurrentPage(page);
     };
 
-    return (<Layout
-        welcome={true}
-        status={true}
-        footer={true}>
+    return (<Layout>
         {loading ? (<div className="flex justify-center items-center my-10">
             <div className="custom-spinner"></div>
-        </div>) : (<NewsCardList props={{currentPage, totalPage, watchPage, loading , articles}}/>)}
+        </div>) : (<NewsCardList props={{currentPage, totalPage, watchPage, loading, articles}}/>)}
     </Layout>);
 }
