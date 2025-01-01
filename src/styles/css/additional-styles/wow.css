@@ -77,7 +77,7 @@ li .hover\:text-warning:hover {
     background-color: rgba(76, 61, 53, .74);
 }
 
-.status-server .card {
+.status-server  {
     background-color: #16120f;
     background-image: url('/assets/bg/status-bg.jpg');
     background-position: center;
@@ -88,6 +88,7 @@ li .hover\:text-warning:hover {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    min-height: 24vh;
     word-wrap: break-word;
     color: #EBDEC2;
 }
@@ -201,6 +202,65 @@ li .hover\:text-warning:hover {
     margin-top: 4px;
 }
 
+.status-dot {
+    display: inline-block;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+}
+
+.status-dot > span,
+.status-dot > span > span {
+    display: block;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    animation: pulse 1.5s linear infinite;
+}
+
+.status-dot > span > span:after {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    animation: pulse 1.5s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        background-color: #35e861;
+    }
+    50% {
+        background-color: rgba(110, 255, 122, .4);
+    }
+    100% {
+        background-color: #35e861;
+    }
+}
+
+.status-dot.online {
+    background-color: #35e861;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink-offline {
+    0% {
+        background-color: #ff4b44;
+    }
+    50% {
+        background-color: rgba(236, 133, 134, .4);
+    }
+    100% {
+        background-color: #ff4b44;
+    }
+}
+
+.status-dot.offline {
+    background-color: #ff4b44;
+    animation: blink-offline 1s infinite;
+}
+
 .wow-news-right-line {
     content: '';
     position: absolute;
@@ -288,5 +348,23 @@ form .checkBox  .after\:bg-primary::after {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.skeleton {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
     }
 }

@@ -21,7 +21,6 @@ export const GetNews = async (limit = 2, offset = 0) => {
     return await GET({ url: `news?limit=${limit}&offset=${offset}` });
 };
 
-
 export const GetNewsByID = async (newsId) => {
     return await GET({url: `news/${newsId}`});
 };
@@ -37,4 +36,12 @@ export const UpdateComment = async () => {
 
 export const DeleteComment = async (commentId) => {
     return await DELETE({url: `news/comment/${commentId}`});
+};
+// Status
+export const ServerStatus = async (id) => {
+    return  await GET({ url: `status/${id}` });
+};
+// Live
+export const CheckLive = async () => {
+    return  await GET({ url: 'livez' });
 };

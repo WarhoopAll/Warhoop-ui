@@ -16,8 +16,6 @@ export default function Home() {
         try {
             const response = await GetNews(limit, offset);
             const data = await response.json();
-            const url = `news?limit=${limit}&offset=${offset}`;
-
             setArticles(data?.data || []);
             setTotalPage(Math.ceil(data?.total / limit));
         } catch (error) {

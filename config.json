@@ -1,6 +1,9 @@
 {
-  "baseUrlAPI": "https://api.warhoop.su/",
-  "AoWow": {
-    "BaseUrlBD": "https://db.warhoop.su/"
+  "App": "https://api.warhoop.su/",
+  "Aowow": "https://wowdb.io/",
+  "Realm": {
+    "id": "1",
+    "rate": "x5",
+    "flag": "PvP"
   }
 }
