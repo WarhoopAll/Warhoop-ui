@@ -1,11 +1,12 @@
 import Home from "../pages/home";
 import News from "../pages/news";
+import Online from "@/pages/online";
 
 export const publicRoutes = [
-    // {
-    //     path: '*',
-    //     Component: NotFound
-    // }
+    {
+        path: '/online',
+        Component: Online
+    },
     {
         path: '/',
         Component: Home
