@@ -1,8 +1,9 @@
 import {Tooltip} from "@nextui-org/react";
 import {classes, races} from "@/utils/wowData";
+import i18n from "i18next";
 
 export default function OnlineTableItem(props) {
-    const currentLanguage = 'ru';
+    const currentLanguage = i18n.language;
     const raceName = races[props.race];
     const className = classes[props.class];
 
