@@ -1,7 +1,7 @@
 export default function Footer() {
     return (<>
         <footer className=" text-center w-full absolute bottom-0">
-            <div className="w-full mx-auto max-w-screen-xl pb-4 md:flex md:items-center md:justify-between">
+            <div className="w-full mx-auto max-w-screen-xl pb-4 px-4 flex flex-col items-center md:flex-row md:justify-between">
              <span className="text-sm text-customTXT sm:text-center dark:text-gray-400">
                 © 2025
                <a href="https://warhoop.su/" className="hover:underline"> Warhoop™</a>. All Rights Reserved.

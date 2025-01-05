@@ -7,7 +7,7 @@ export default function Layout({children, nav = true, welcome = true, status = t
     return (
         <div className="min-h-screen flex flex-col relative">
             <div className="mx-auto mt-0 mb-44 container">
-                <div className="mb-96">
+                <div className="mb-8 xl:mb-80">
                     {nav && (
                         <div>
                             <Navigation/>
