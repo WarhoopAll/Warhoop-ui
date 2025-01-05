@@ -8,7 +8,7 @@ import config from '@/../config.json';
 
 export default function StatusServer() {
     const {t} = useTranslation();
-    const [serverStatus, setServerStatus] = useState(null);
+    const [serverStatus, setServerStatus] = useState(undefined);  // Установка undefined по умолчанию
     const [loading, setLoading] = useState(true);
     const [isOnline, setIsOnline] = useState(false);
 
@@ -20,63 +20,76 @@ export default function StatusServer() {
 
                 if (response.status === 200) {
                     const jsonData = await response.json();
-                    setServerStatus(jsonData?.data || {});
+                    setServerStatus(jsonData?.data || undefined);
                     setIsOnline(true);
                 } else {
                     setIsOnline(false);
+                    setServerStatus(undefined);
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
             } catch (error) {
                 setIsOnline(false);
+                setServerStatus(undefined);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1500);
             }
         };
 
         fetchStatus();
     }, []);
 
-    return (<Link to={`/${isOnline ? "online" : "offline"}`}>
-        {loading ? (<Skeleton className="status-server"></Skeleton>) : (<div className="status-server">
-            <div className="card">
-                <div className="card-body">
-                    <div className="card-void"></div>
-                    <h1 className="mt-2 mb-2 p-5">
-                        {serverStatus?.realm?.name}
-                    </h1>
-                </div>
-                <div className="card-footer bluer">
-                    <div className="media mb-3">
-                        <div className="media-body align-self-center">
-                            <div className="card-status-name">
-                                <h5>
-                                    <span className="color-red">{config.Realm.flag}</span>
-                                    <span className="ml-2">{config.Realm.rate}</span>
-                                </h5>
-                            </div>
+    return (
+        <Link to={`/${isOnline ? "online" : "offline"}`}>
+            {loading ? (
+                <Skeleton className="status-server"></Skeleton>
+            ) : (
+                <div className="status-server max-w-md max-h-md">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="card-void"></div>
+                            <h1 className="mt-2 mb-2 p-5">
+                                {serverStatus?.realm?.name || t("ServerStats.Offline")}
+                            </h1>
                         </div>
-                        <div className="online-border">
-                            <div className="media">
-                                <div className="media-body">
-                                    <div
-                                        className={`status-dot ${isOnline ? "online" : "offline"} align-self-center`}>
+                        <div className="card-footer bluer">
+                            <div className="media mb-3">
+                                <div className="media-body align-self-center">
+                                    <div className="card-status-name">
+                                        <h5>
+                                            <span className="color-red">{config.Realm.flag || "undefined"}</span>
+                                            <span className="ml-2">{config.Realm.rate || "undefined"}</span>
+                                        </h5>
                                     </div>
                                 </div>
-                                <h5>{isOnline ? serverStatus?.charOnline : "0"}</h5>
+                                <div className="online-border">
+                                    <div className="media">
+                                        <div className="media-body">
+                                            <div
+                                                className={`status-dot ${isOnline ? "online" : "offline"} align-self-center`}>
+                                            </div>
+                                        </div>
+                                        <h5>{isOnline ? serverStatus?.charOnline || serverStatus?.charOnline :"0"}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="media footer-text">
+                                <div className="media-body">
+                                    {t("ServerStats.Uptime")}
+                                </div>
+                                {serverStatus?.uptime ? (
+                                    <span>
+                                        {formatUptime(serverStatus?.uptime)}
+                                    </span>
+                                ) : (
+                                    <span>{t("ServerStats.Offline")}</span>
+                                )}
                             </div>
                         </div>
                     </div>
-                    <div className="media footer-text">
-                        <div className="media-body">
-                            {t("ServerStats.Uptime")}
-                        </div>
-                        {serverStatus?.uptime && (<span>
-        {isOnline ? formatUptime(serverStatus?.uptime) : t("ServerStats.Offline")}
-    </span>)}
-                    </div>
                 </div>
-            </div>
-        </div>)}
-    </Link>);
+            )}
+        </Link>
+    );
 }
-

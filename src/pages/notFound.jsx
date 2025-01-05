@@ -6,7 +6,7 @@ export default function NotFound() {
     return (
         <Layout>
             <div
-                className="flex flex-col justify-center items-center min-h-[25vh] bg-customBg shadow-lg rounded-lg border border-customBrown p-3 mb-4">
+                className="flex flex-col justify-center items-center min-h-[24.5vh]  bg-customBg shadow-lg rounded-lg border border-customBrown">
                 <h1 className="text-6xl font-bold text-white">404</h1>
                 <p className="text-2xl text-white mt-4">{t("PageNotFound")}</p>
             </div>

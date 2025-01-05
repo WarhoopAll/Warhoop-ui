@@ -362,3 +362,93 @@ form .checkBox  .after\:bg-primary::after {
         opacity: 0.6;
     }
 }
+
+.group[data-focus="true"] .group-data-\[focus\=true\]\:bg-default-100 {
+    background-color: #1c1612 !important;
+}
+
+.group[data-hover="true"] .group-data-\[focus\=true\]\:bg-default-100 {
+    background-color: #1c1612 !important;
+}
+
+.group[data-has-value="true"] .group-data-\[has-value\=true\]\:text-default-foreground {
+    color: white !important;
+    font-weight: 400;
+}
+
+.epr_-99lr9q {
+    background-color: #1c1612 !important;
+}
+.epr_-6npj90 {
+    --epr-bg-color: #1c1612 !important;
+    --epr-category-icon-active-color: none !important;
+    --epr-reactions-bg-color: #1c1612 !important;
+}
+.epr_-99lr9q {
+    --epr-bg-color: #1c1612 !important;
+}
+.epr_b8hfyo::-webkit-scrollbar {
+    width: 8px;
+}
+.epr_b8hfyo::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+.epr_b8hfyo::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.epr_-to8mm {
+    border-color: rgb(62, 47, 35) !important;
+}
+
+.epr_x558go:focus {
+    border: rgb(62, 47, 35) !important;
+}
+
+.epr_-3yva2a{
+    border-top: 1px solid rgb(62, 47, 35) !important;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(62, 47, 35);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(100, 75, 50);
+    transition: background-color 0.3s ease;
+}
+
+@media (max-width: 640px) {
+    .emoji-picker {
+        width: 300px;
+        max-height: 350px;
+        overflow-y: auto;
+        margin-top: 5vh;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        /*transform: translateY(20px);*/
+    }
+    to {
+        opacity: 100%
+        /*transform: translateY(0);*/
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1.0s ease-in-out forwards;
+}
