@@ -2,11 +2,11 @@ import {useContext} from "react";
 import {
     Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure,
 } from "@nextui-org/react";
-import toast from "react-hot-toast";
 import {Link} from "react-router-dom";
 import {Signin} from "@/utils/fetch/fetchActions";
 import {UserContext} from "@/context/userContext";
 import {TextInput} from "@/components/forms/input";
+import useCustomToast from "@/components/forms/toast";
 
 export default function LoginModal({t}) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -14,6 +14,9 @@ export default function LoginModal({t}) {
     const [password, setPassword] = React.useState('');
     const {updateSession, logout} = useContext(UserContext);
     const [loading, setLoading] = React.useState(false);
+
+    const { showToast } = useCustomToast();
+
 
     const Send = async (e) => {
         e.preventDefault();
@@ -28,14 +31,14 @@ export default function LoginModal({t}) {
             const res = await Signin(body);
             if (res.status === 200) {
                 const data = await res.json();
-                toast.success(data?.message);
+                showToast(data?.message);
                 updateSession(data?.data);
             } else {
                 const {message} = await res.json();
-                toast.error(message);
+                showToast(message);
             }
         } catch (error) {
-            toast.error('Ошибка авторизации');
+            showToast('Ошибка авторизации');
         } finally {
             setLoading(false);
         }

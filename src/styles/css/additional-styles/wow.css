@@ -315,17 +315,13 @@ form .checkBox  .after\:bg-primary::after {
     }
 }
 
-.shadow-small form .font-semibold {
+.shadow-small form .font-semibold:-webkit-autofill {
     font-weight: 600;
     color: #fff;
 }
 
-.wow-input-bg-color {
+.wow-input-bg-color{
     background-color: #0c0a07 !important;
-}
-
-.testInput {
-    color: #fff  !important;
 }
 
 .wow-input-text-color {
@@ -451,4 +447,39 @@ form .checkBox  .after\:bg-primary::after {
 
 .animate-fadeIn {
     animation: fadeIn 1.0s ease-in-out forwards;
+}
+
+.Toastify__close-button--light {
+    opacity: 1 !important;
+    color: white !important;
+}
+
+.z-50 .hover\:bg-default-100:hover {
+    background-color: #000000c9;
+}
+
+.buttonClose {
+    background: transparent !important;
+    font-size: 14px !important;
+}
+
+.group[data-focus-visible="true"] .group-data-\[focus-visible\=true\]\:ring-2 {
+    --tw-ring-color: transparent;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-inset: initial;
+    box-shadow: none !important;
+}
+
+input.wow-input-text-color,
+input.wow-input-text-color::placeholder,
+input:-webkit-autofill,
+input:-webkit-autofill::first-line {
+    -webkit-text-fill-color: rgb(235 222 194) !important;
+    color: rgb(235 222 194) !important;
+    background-color: transparent !important;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }

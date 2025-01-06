@@ -1,16 +1,14 @@
 import {createContext, useState, useEffect} from 'react';
 import {useTranslation} from "react-i18next";
 import {CheckSession, Logout} from "@/utils/fetch/fetchActions";
+import useCustomToast from "@/components/forms/toast";
+
 
 const UserContext = createContext(undefined);
 
 const UserProvider = ({children}) => {
     const {t} = useTranslation();
-
-    const [isAuth, setIsAuth] = useState(() => {
-        const storedSession = localStorage.getItem('auth.message');
-        return storedSession !== null;
-    });
+    const { showToast } = useCustomToast();
 
     const [session, setSession] = useState(() => {
         const storedSession = localStorage.getItem('auth.message');
@@ -23,7 +21,6 @@ const UserProvider = ({children}) => {
         const permissions = gmLevels[data?.access?.security_level] || gmLevels[0];
         const sessionData = {...data, account_permissions: permissions};
         setSession(sessionData);
-        setIsAuth(true);
         localStorage.setItem('auth.message', JSON.stringify(sessionData));
     };
 
@@ -41,16 +38,16 @@ const UserProvider = ({children}) => {
         try {
             const response = await Logout();
             if (response.ok) {
-                setIsAuth(false);
                 setSession(null);
                 localStorage.removeItem('auth.message');
             }
-        } catch {
+        } catch (error) {
+            showToast('Error while loading data');
         }
     };
 
     const checkSession = async () => {
-        if (!isAuth) {
+        if (!session) {
             setLoading(false);
             return;
         }
@@ -71,13 +68,13 @@ const UserProvider = ({children}) => {
 
     useEffect(() => {
         checkSession();
-    }, [isAuth]);
+    }, []);
 
-    return (<UserContext.Provider value={{isAuth, session, updateSession, logout, loading}}>
-        {children}
-    </UserContext.Provider>);
+    return (
+        <UserContext.Provider value={{session, updateSession, logout, loading}}>
+            {children}
+        </UserContext.Provider>
+    );
 };
 
 export {UserContext, UserProvider};
-
-

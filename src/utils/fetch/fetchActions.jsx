@@ -45,3 +45,8 @@ export const ServerStatus = async (id) => {
 export const CheckLive = async () => {
     return  await GET({ url: 'livez' });
 };
+
+// Like
+export const Reaction = async (body) => {
+    return await POST({url: 'reaction', body});
+};

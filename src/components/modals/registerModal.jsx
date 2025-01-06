@@ -2,9 +2,9 @@ import {useState} from "react";
 import {
     Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox,
 } from "@nextui-org/react";
-import toast from "react-hot-toast";
 import {Signup} from "@/utils/fetch/fetchActions";
 import {TextInput} from "@/components/forms/input";
+import useCustomToast from "@/components/forms/toast";
 
 export default function RegisterModal({t}) {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -13,6 +13,9 @@ export default function RegisterModal({t}) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const { showToast } = useCustomToast();
+
 
     async function Send(e) {
         e.preventDefault();
@@ -23,14 +26,14 @@ export default function RegisterModal({t}) {
         };
 
         if (password !== confirmPassword) {
-            toast.error(`${t("RegPage.PasswordRetypePassword")}`);
+            showToast(`${t("RegPage.PasswordRetypePassword")}`);
             setLoading(false);
             return;
         }
 
         const forbiddenChars = /[^a-zA-Z0-9]/;
         if (forbiddenChars.test(login) || forbiddenChars.test(password)) {
-            toast.error(`${t("RegPage.LoginError")}`);
+            showToast(`${t("RegPage.LoginError")}`);
             setLoading(false);
             return;
         }
@@ -40,14 +43,14 @@ export default function RegisterModal({t}) {
 
             if (res.status === 201) {
                 const {message} = await res.json();
-                toast.success(message);
+                showToast(message);
                 handleClose();
             } else {
                 const {message} = await res.json();
-                toast.error(message);
+                showToast(message);
             }
         } catch (error) {
-            // toast.error(`${t("RegPage.GenericError")}`);
+            showToast(`${t("RegPage.GenericError")}`);
         } finally {
             setLoading(false);
         }

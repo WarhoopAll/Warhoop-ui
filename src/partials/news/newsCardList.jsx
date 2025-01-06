@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom';
 import {formatDate} from "@/utils/formatDate";
 import Pagination from "@/components/features/pagination";
-import {ThumbDownIcon, ThumbUpIcon} from "@/components/icons/icons";
 import {Skeleton} from "@nextui-org/react";
 import {useEffect, useState} from "react";
 import {GetNews} from "@/utils/fetch/fetchActions";
+import {HandThumbDownIcon} from "@heroicons/react/16/solid";
+import {HandThumbUpIcon} from "@heroicons/react/24/solid";
 
 export default function NewsCardList() {
     const [articles, setArticles] = useState([]);
@@ -27,7 +28,6 @@ export default function NewsCardList() {
             }, 1500);
         }
     };
-
 
     useEffect(() => {
         fetchData();
@@ -80,12 +80,12 @@ export default function NewsCardList() {
                                 </div>)}
                                 {article?.like_count > 0 && (<div
                                     className="flex items-center before:content-['·'] before:text-slate-400 before:px-2">
-                                    <ThumbUpIcon/>
+                                    <HandThumbUpIcon className="text-slate-500 w-5 h-5"/>
                                     <span className="text-slate-500 ml-1">{article?.like_count}</span>
                                 </div>)}
                                 {article?.dis_like_count > 0 && (<div
                                     className="flex items-center before:content-['·'] before:text-slate-400 before:px-2">
-                                    <ThumbDownIcon/>
+                                    <HandThumbDownIcon className="text-slate-500 w-5 h-5"/>
                                     <span
                                         className="text-slate-500 ml-1">{article?.dis_like_count}</span>
                                 </div>)}

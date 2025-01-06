@@ -1,9 +1,10 @@
-import {useTranslation} from "react-i18next";
 import {Button} from "@nextui-org/react";
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/16/solid";
+import {ChevronLeftIcon, ChevronRightIcon, HandThumbUpIcon} from "@heroicons/react/24/solid";
 
 export default function Pagination({props, showNavigationButtons = true}) {
-    const {t} = useTranslation();
+    if (!props || !props.totalPage || !props.currentPage) {
+        return null;
+    }
     let pages = [];
 
     const getRange = (start, end) => Array(end - start + 1).fill().map((v, i) => i + start);
@@ -43,21 +44,21 @@ export default function Pagination({props, showNavigationButtons = true}) {
         <div className="pagination-container">
             {props.loading ? null : (
                 <nav className="flex justify-center md:justify-start md:space-x-4">
-                    {showNavigationButtons && props.currentPage > 1 && (
-                        <div className="mr-2">
-                            <Button
-                                auto
-                                onPress={() => props.watchPage(props.currentPage - 1)}
-                                className="btn bg-black text-indigo-500 p-2"
-                            >
-                                <ChevronLeftIcon className="h-5 w-5 sm:hidden"/>  {/* Стрелка вместо текста на мобильных */}
-                                <span className="hidden sm:inline">{t("Pagination.Previous")}</span>
-                            </Button>
-                        </div>
-                    )}
-
                     <div className="grow text-center overflow-x-auto md:overflow-visible scrollbar-hide">
-                        <ul className="inline-flex text-sm font-medium space-x-1">
+                        <ul className="inline-flex text-sm font-medium items-center space-x-0.5">
+                            {showNavigationButtons && (
+                                <li>
+                                    <Button
+                                        isDisabled={props.currentPage === 1}
+                                        auto
+                                        onPress={() => props.watchPage(props.currentPage - 1)}
+                                        className="buttonClose"
+                                    >
+                                        <ChevronLeftIcon className="h-5 w-5"/>
+                                    </Button>
+                                </li>
+                            )}
+
                             {pages.map((element, index) => (
                                 element === "..." ? (
                                     <li key={index}>
@@ -79,21 +80,20 @@ export default function Pagination({props, showNavigationButtons = true}) {
                                     </li>
                                 )
                             ))}
+
+                            {showNavigationButtons && props.currentPage < props.totalPage && (
+                                <li>
+                                    <Button
+                                        auto
+                                        onPress={() => props.watchPage(props.currentPage + 1)}
+                                        className="buttonClose"
+                                    >
+                                        <ChevronRightIcon className="h-5 w-5"/>
+                                    </Button>
+                                </li>
+                            )}
                         </ul>
                     </div>
-
-                    {showNavigationButtons && props.currentPage < props.totalPage && (
-                        <div className="ml-2">
-                            <Button
-                                auto
-                                onPress={() => props.watchPage(props.currentPage + 1)}
-                                className="btn bg-white border-slate-200 hover:border-slate-300 text-indigo-500 p-2"
-                            >
-                                <ChevronRightIcon className="h-5 w-5 sm:hidden"/>  {/* Стрелка вместо текста */}
-                                <span className="hidden sm:inline">{t("Pagination.Next")}</span>
-                            </Button>
-                        </div>
-                    )}
                 </nav>
             )}
         </div>
