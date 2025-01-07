@@ -1,15 +1,26 @@
 export const formatDate = (timestamp) => {
+    if (!timestamp) return 'Invalid date';
+
     const options = {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
+        timeZone: 'UTC',
     };
 
-    const formatter = new Intl.DateTimeFormat(localStorage.getItem('language') || 'en', options);
-    return formatter.format(new Date(timestamp));
+    const language = localStorage.getItem('language') || 'en';
+
+    try {
+        const formatter = new Intl.DateTimeFormat(language, options);
+        return formatter.format(new Date(timestamp));
+    } catch (error) {
+        console.error('Date formatting error:', error);
+        return new Date(timestamp).toISOString().replace('T', ' ').slice(0, 16);
+    }
 };
+
 
 export function formatUptime(seconds) {
     const d = Math.floor(seconds / (3600 * 24));
