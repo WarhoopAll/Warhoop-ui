@@ -5,13 +5,13 @@ import CommentReply from "@/partials/news/comment";
 import { useTranslation } from "react-i18next";
 import ReactionButton from "@/components/forms/ReactionButton";
 
-export default function CommentCard({ comments }) {
+export default function CommentCard({ comments, addComment }) {
     const { t } = useTranslation();
 
     return (
         <div className="news-comments-container mt-6 bg-customBg rounded-lg border border-customBrown p-6 text-white shadow-lg">
             <h2 className="text-2xl font-bold mb-6">{t("Comments")}</h2>
-            <CommentReply />
+            <CommentReply addComment={addComment} />
             {comments?.length > 0 ? (
                 comments?.map((comment) => {
                     const isUpdated = comment?.updated_at && comment?.updated_at !== comment?.created_at;

@@ -1,17 +1,17 @@
-import { useContext, useState } from "react";
-import { Button, Textarea } from "@nextui-org/react";
+import {useContext, useState} from "react";
+import {Button, Textarea} from "@nextui-org/react";
 import Emoji from "@/components/forms/emoji";
-import { UserContext } from "@/context/userContext";
-import { useTranslation } from "react-i18next";
+import {UserContext} from "@/context/userContext";
+import {useTranslation} from "react-i18next";
 import {CreateComment} from "@/utils/fetch/fetchActions";
 import {useParams} from "react-router-dom";
 
-export default function CommentReply() {
-    const { t } = useTranslation();
+export default function CommentReply({addComment}) {
+    const {t} = useTranslation();
     const [expanded, setExpanded] = useState(false);
     const [comment, setComment] = useState("");
     const [loading, setLoading] = useState(false);
-    const { session } = useContext(UserContext);
+    const {session} = useContext(UserContext);
     const {id} = useParams();
 
     const handleFocus = () => {
@@ -34,10 +34,16 @@ export default function CommentReply() {
                 text: comment,
             });
 
-            if (response?.status === "success") {
-                // addComment(response.data);
+            const data = await response.json();
+
+            console.log("API:", data);
+
+            if (data?.status === "success") {
+                console.log("comment", data.data);
+                addComment(data.data);
                 setComment("");
-                setExpanded(false);
+            } else {
+                console.error("Error");
             }
         } catch (error) {
             console.error("Failed to submit comment", error);
@@ -46,11 +52,12 @@ export default function CommentReply() {
         }
     };
 
+
     return (
         <div className="relative mb-8">
             {session ? (
                 <>
-                    <Emoji setComment={setComment} handleFocus={handleFocus} />
+                    <Emoji setComment={setComment} handleFocus={handleFocus}/>
                     <Textarea
                         id="comment"
                         placeholder={t("LeaveComment")}
