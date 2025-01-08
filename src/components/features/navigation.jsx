@@ -46,7 +46,6 @@ export default function Navigation() {
 
 
     return (
-
         <Navbar
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}

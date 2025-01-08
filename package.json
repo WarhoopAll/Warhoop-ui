@@ -15,6 +15,7 @@
     "@nextui-org/system": "^2.0.15",
     "@nextui-org/theme": "^2.1.18",
     "@nextui-org/use-infinite-scroll": "^2.1.2",
+    "@react-icons/all-files": "^4.1.0",
     "@tailwindcss/forms": "^0.5.7",
     "dompurify": "^3.2.3",
     "emoji-picker-react": "^4.12.0",

@@ -24,13 +24,17 @@ export const GetNews = async (limit = 2, offset = 0) => {
 export const GetNewsByID = async (newsId) => {
     return await GET({url: `news/${newsId}`});
 };
-// Comment
-export const CreateComment = async (body) => {
-    const url = 'news/comment';
-    return await POST({url, body});
+
+export const UpdateNews = async (body) => {
+    return await PATCH({url: 'news', body});
 };
 
-export const UpdateComment = async () => {
+// Comment
+export const CreateComment = async (body) => {
+    return await POST({url:'news/comment', body});
+};
+
+export const UpdateComment = async (body) => {
     return await PATCH({url: 'news/comment', body});
 };
 

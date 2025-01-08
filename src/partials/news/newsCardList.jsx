@@ -95,9 +95,9 @@ export default function NewsCardList() {
             </div>
             {totalPage > 1 && (
                 <div
-                    className="py-4 transition-opacity duration-500 ease-in-out opacity-0 animate-fadeIn"
+                    className="duration-500 ease-in-out opacity-0 animate-fadeIn"
                 >
-                    <Pagination props={{ watchPage, totalPage, currentPage, loading }} />
+                    <Pagination props={{watchPage, totalPage, currentPage, loading}}/>
                 </div>
             )}
 

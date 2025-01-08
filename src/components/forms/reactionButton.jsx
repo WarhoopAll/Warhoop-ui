@@ -2,6 +2,8 @@ import { HandThumbUpIcon, HandThumbDownIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import useCustomToast from "@/components/forms/toast";
 import {Reaction} from "@/utils/fetch/fetchActions";
+import {Tooltip} from "@nextui-org/react";
+import {useTranslation} from "react-i18next";
 
 export default function ReactionButton({ objectId, objectType, initialLikes = 0, initialDisLikes = 0 }) {
     const [likes, setLikes] = useState(initialLikes);
@@ -10,6 +12,8 @@ export default function ReactionButton({ objectId, objectType, initialLikes = 0,
     const [hasDisliked, setHasDisliked] = useState(false);
     const { showToast } = useCustomToast();
     const [loading, setLoading] = useState(false);
+    const {t} = useTranslation();
+
 
     const handleReaction = async (reactionType) => {
         if (loading) return;
@@ -63,6 +67,7 @@ export default function ReactionButton({ objectId, objectType, initialLikes = 0,
 
     return (
         <div className="flex items-center bg-inputCol rounded-lg p-2 mt-4 shadow-2xl">
+            <Tooltip content={t("Like")} showArrow={true}>
             <div
                 className={`cursor-pointer flex items-center ${hasLiked ? "text-customTXT" : ""}`}
                 onClick={() => handleReaction(1)}
@@ -74,15 +79,20 @@ export default function ReactionButton({ objectId, objectType, initialLikes = 0,
                 )}
                 <span className="ml-2">{likes}</span>
             </div>
+            </Tooltip>
             <div className="border-s border-customBrown ml-2" onClick={() => handleReaction(2)}>
+                <Tooltip content={t("DisLike")} showArrow={true}>
+
                 <div className={`cursor-pointer flex items-center ${hasDisliked ? "text-customTXT" : ""}`}>
                     {loading && hasDisliked ? (
                         <span className="loader w-5 h-5 border-2 border-t-transparent rounded-full animate-spin"></span>
                     ) : (
                         <HandThumbDownIcon className="w-5 h-5 hover:text-customTXT ml-2" />
                     )}
+
                     <span className="ml-2">{dislikes}</span>
                 </div>
+                </Tooltip>
             </div>
         </div>
     );
