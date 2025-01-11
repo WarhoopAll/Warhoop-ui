@@ -6,7 +6,7 @@ import {ToastContainer} from "react-toastify";
 export default function Maintenance() {
     const {t} = useTranslation();
     return (
-        <Layout welcome={false} status={false}>
+        <Layout nav={false} welcome={false} status={false}>
             <div
                 className="flex flex-col justify-center items-center text-center bg-customBg shadow-2xl rounded-xl border-4 border-customBrown p-10">
                 <h1 className="text-6xl font-extrabold text-white">{t("Maintenance.Main")}</h1>

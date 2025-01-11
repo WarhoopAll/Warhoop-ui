@@ -8,7 +8,7 @@ import config from '@/../config.json';
 
 export default function StatusServer() {
     const {t} = useTranslation();
-    const [serverStatus, setServerStatus] = useState(undefined);  // Установка undefined по умолчанию
+    const [serverStatus, setServerStatus] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [isOnline, setIsOnline] = useState(false);
 
@@ -16,7 +16,7 @@ export default function StatusServer() {
         const fetchStatus = async () => {
             try {
                 setLoading(true);
-                const response = await ServerStatus(`${config.Realm.id}`);
+                const response = await ServerStatus();
 
                 if (response.status === 200) {
                     const jsonData = await response.json();
@@ -78,9 +78,9 @@ export default function StatusServer() {
                                 <div className="media-body">
                                     {t("ServerStats.Uptime")}
                                 </div>
-                                {serverStatus?.uptime ? (
+                                {serverStatus?.starttime ? (
                                     <span>
-                                        {formatUptime(serverStatus?.uptime)}
+                                        {formatUptime(serverStatus?.starttime)}
                                     </span>
                                 ) : (
                                     <span>{t("ServerStats.Offline")}</span>

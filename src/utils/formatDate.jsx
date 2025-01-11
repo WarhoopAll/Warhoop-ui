@@ -22,10 +22,13 @@ export const formatDate = (timestamp) => {
 };
 
 
-export function formatUptime(seconds) {
-    const d = Math.floor(seconds / (3600 * 24));
-    const h = Math.floor((seconds % (3600 * 24)) / 3600);
-    const m = Math.floor((seconds % 3600) / 60);
+export function formatUptime(starttime) {
+    const currentTime = Math.floor(Date.now() / 1000);
+    const elapsedSeconds = currentTime - starttime;
+
+    const d = Math.floor(elapsedSeconds / (3600 * 24));
+    const h = Math.floor((elapsedSeconds % (3600 * 24)) / 3600);
+    const m = Math.floor((elapsedSeconds % 3600) / 60);
 
     const language = localStorage.getItem('language') || 'en';
     const translations = {
@@ -33,7 +36,7 @@ export function formatUptime(seconds) {
         'ru': { d: 'д', h: 'ч', m: 'м' },
     };
 
-    const t = translations[language] || translations['en-US'];
+    const t = translations[language] || translations['en'];
 
     let result = [];
     if (d > 0) result.push(`${d}${t.d}`);

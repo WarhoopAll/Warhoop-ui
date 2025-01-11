@@ -15,7 +15,7 @@ const Root = () => {
                 <NextUIProvider>
                     <ApiStatusProvider>
                         <App />
-                        <ToastWrapper />  {/* Этот компонент добавляет ToastContainer в DOM */}
+                        <ToastWrapper />
                     </ApiStatusProvider>
                 </NextUIProvider>
             </I18nLoader>

@@ -42,8 +42,8 @@ export const DeleteComment = async (commentId) => {
     return await DELETE({url: `news/comment/${commentId}`});
 };
 // Status
-export const ServerStatus = async (id) => {
-    return  await GET({ url: `status/${id}` });
+export const ServerStatus = async () => {
+    return  await GET({ url: `status` });
 };
 // Live
 export const CheckLive = async () => {
