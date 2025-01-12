@@ -483,3 +483,18 @@ input:focus {
     outline: none !important;
     box-shadow: none !important;
 }
+
+.no-news {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.no-news h2 {
+    font-size: 24px;
+}
+
+.no-news p {
+    font-size: 18px;
+}

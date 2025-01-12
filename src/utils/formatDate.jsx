@@ -45,3 +45,25 @@ export function formatUptime(starttime) {
 
     return result.join(' ') || `0${t.m}`;
 }
+
+export function getCommentWord(count) {
+    const locale = localStorage.getItem('language') || 'en';
+
+    const translations = {
+        en: ["comment", "comments"],
+        ru: ["комментарий", "комментария", "комментариев"],
+    };
+
+    const langTranslations = translations[locale] || translations['en'];
+
+    if (locale === 'ru') {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return langTranslations[
+            count % 100 > 4 && count % 100 < 20
+                ? 2
+                : cases[Math.min(count % 10, 5)]
+            ];
+    } else {
+        return count === 1 ? langTranslations[0] : langTranslations[1];
+    }
+}

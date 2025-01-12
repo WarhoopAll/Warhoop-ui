@@ -5,8 +5,9 @@ import {useParams} from "react-router-dom";
 import NewsCard from "@/partials/news/newsCard";
 import CommentCard from "@/partials/news/commentCard";
 import {UserContext} from "@/context/userContext";
-import {Button} from "@nextui-org/react";
 import {useTranslation} from "react-i18next";
+import useCustomToast from "@/components/forms/toast";
+import {Skeleton} from "@nextui-org/react";
 
 export default function News() {
     const {t} = useTranslation()
@@ -15,9 +16,10 @@ export default function News() {
     const [news, setNews] = useState(null);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const {showToast} = useCustomToast();
 
     useEffect(() => {
+        setLoading(true);
         if (id) {
             GetNewsByID(id)
                 .then((response) => response.json())
@@ -28,6 +30,7 @@ export default function News() {
                     }
                 })
                 .finally(() => setLoading(false));
+
         }
     }, [id]);
 
@@ -43,27 +46,27 @@ export default function News() {
         setComments((prev) => prev.filter((c) => c.id !== commentId));
     };
 
-    if (loading) {
-        return (<Layout>
-                <div className="news-container animate-fadeIn">
-                    <h1>Loading...</h1>
-                </div>
-            </Layout>);
-    }
-
     return (<Layout>
+        {loading ? (<div className="flex flex-col min-h-[32vh] space-y-4">
+            <Skeleton
+                className="news-container bg-customBg rounded-lg border border-customBrown p-8 text-white shadow-lg min-h-[30vh] flex flex-col "></Skeleton>
+            <Skeleton className="news-comments-container mt-6 bg-customBg rounded-lg border border-customBrown p-6 text-white shadow-lg min-h-[20vh]"></Skeleton>
+
+        </div>) : (<>
             <NewsCard
-                news={news}
-                session={session}
-                updateNews={updateNews}
-                t={t}
-            />
-            <CommentCard
-                comments={comments}
-                addComment={addComment}
-                deleteComment={deleteComment}
-                session={session}
-                t={t}
-            />
-        </Layout>);
+            news={news}
+            session={session}
+            updateNews={updateNews}
+            t={t}
+        />
+        <CommentCard
+            comments={comments}
+            addComment={addComment}
+            deleteComment={deleteComment}
+            session={session}
+            t={t}
+            showToast={showToast}
+        />
+        </>)}
+            </Layout>);
 }

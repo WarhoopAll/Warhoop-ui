@@ -54,3 +54,8 @@ export const CheckLive = async () => {
 export const Reaction = async (body) => {
     return await POST({url: 'reaction', body});
 };
+
+// Report
+export const Report = async (body) => {
+    return await POST({url: 'report', body});
+};

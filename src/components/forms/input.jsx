@@ -23,23 +23,23 @@ export const TextInput = ({
     };
 
     return (<Input
-            id={id}
-            label={label}
-            autoComplete='on'
-            size='lg'
-            value={internalValue}
-            onChange={handleChange}
-            type={isPassword ? (visible ? "text" : "password") : type}
-            classNames={{
-                inputWrapper: "wow-input-bg-color", input: "wow-input-text-color"
-            }}
-            endContent={isPassword && (<button
-                    className="focus:outline-none"
-                    type="button"
-                    onClick={toggleVisibility}
-                >
-                    {visible ? (<EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none"/>) : (
-                        <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none"/>)}
-                </button>)}
-        />);
+        id={id}
+        label={label}
+        autoComplete='on'
+        size='lg'
+        value={internalValue}
+        onChange={handleChange}
+        type={isPassword ? (visible ? "text" : "password") : type}
+        classNames={{
+            inputWrapper: "wow-input-bg-color", input: "wow-input-text-color"
+        }}
+        endContent={isPassword && (<button
+            className="focus:outline-none"
+            type="button"
+            onClick={toggleVisibility}
+        >
+            {visible ? (<EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none"/>) : (
+                <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none"/>)}
+        </button>)}
+    />);
 };

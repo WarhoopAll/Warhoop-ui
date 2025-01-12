@@ -16,7 +16,7 @@ const useCustomToast = () => {
     const ToastWrapper = () => isMounted ? (
         createPortal(
             <ToastContainer
-                autoClose={8000}
+                autoClose={2000}
                 hideProgressBar={true}
                 limit={5}
                 stacked

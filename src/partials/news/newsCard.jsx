@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {formatDate} from "@/utils/formatDate";
+import {formatDate, getCommentWord} from "@/utils/formatDate";
 import ReactionButton from "@/components/forms/reactionButton";
 import {
     Button,
@@ -44,19 +44,19 @@ export default function NewsCard({news, session, updateNews, t}) {
             if (result?.status === 'success') {
                 updateNews(result?.data);
                 onClose();
-                showToast(result?.message);
+                showToast(`${t("NewsUpdate")}`);
             } else {
-                showToast(result?.message || 'Error updating news');
+                showToast(`${t("Error")}`);
             }
         } catch (error) {
-            showToast('Network error or server unavailable');
+            showToast(`${t("Error")}`);
         } finally {
             setLoading(false);
         }
     };
 
     return (<div
-        className="news-container bg-customBg rounded-lg border border-customBrown p-8 text-white shadow-lg min-h-[30vh] flex flex-col">
+        className="news-container bg-customBg rounded-lg border border-customBrown p-8 text-white shadow-lg min-h-[30vh] flex flex-col animate-fadeIn">
         <div className="news-header mb-6 border-b border-customBrown pb-4 flex justify-between items-center">
             <div>
                 <h1 className="text-3xl font-bold mb-2">{news?.title}</h1>
@@ -91,7 +91,7 @@ export default function NewsCard({news, session, updateNews, t}) {
                     initialDisLikes={news?.dislike_count}
                 />
             </div>
-            <span className="flex items-center">💬 {news?.comments_count} Comments</span>
+            💬 {news?.comments_count} {getCommentWord(news?.comments_count || 0)}
         </div>
         <Modal
             ref={targetRef}
