@@ -17,9 +17,7 @@ export default function I18nLoader({children}) {
     }, []);
 
     if (!isReady) {
-        return <div className="flex justify-center items-center my-10">
-            <div className="custom-spinner"></div>
-        </div>;
+        return <></>;
     }
 
     return children;

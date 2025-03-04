@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {formatDate, getCommentWord} from "@/utils/formatDate";
 import ReactionButton from "@/components/forms/reactionButton";
 import {
@@ -17,20 +17,28 @@ import {
 import {FaEdit} from "@react-icons/all-files/fa/FaEdit";
 import {UpdateNews} from "@/utils/fetch/fetchActions";
 import useCustomToast from "@/components/forms/toast";
+import processTextWithTooltips from "@/hook/useWoWDBLinks;";
 
 export default function NewsCard({news, session, updateNews, t}) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const targetRef = React.useRef(null);
     const {moveProps} = useDraggable({targetRef, isDisabled: !isOpen});
+    const [loading, setLoading] = useState(false);
     const {showToast} = useCustomToast();
 
     const isUpdated = news?.updated_at && news?.updated_at !== news?.created_at;
     const isAuthor = session?.profile?.id === news?.profile?.id;
     const access = session?.access?.security_level > 2;
 
-    const [title, setTitle] = useState(news?.title);
-    const [text, setText] = useState(news?.text);
-    const [loading, setLoading] = useState(false);
+    const [title, setTitle] = useState(news?.title || "");
+    const [text, setText] = useState(news?.text || "");
+
+    useEffect(() => {
+        if (news) {
+            setTitle(news.title || "");
+            setText(news.text || "");
+        }
+    }, [news]);
 
     const handleUpdate = async (onClose) => {
         setLoading(true);
@@ -44,6 +52,11 @@ export default function NewsCard({news, session, updateNews, t}) {
             if (result?.status === 'success') {
                 updateNews(result?.data);
                 onClose();
+                setTimeout(() => {
+                    if (window.$WowheadPower) {
+                        window.$WowheadPower.refreshLinks();
+                    }
+                }, 300);
                 showToast(`${t("NewsUpdate")}`);
             } else {
                 showToast(`${t("Error")}`);
@@ -80,7 +93,7 @@ export default function NewsCard({news, session, updateNews, t}) {
         </div>
         <div
             className="news-content leading-relaxed text-lg text-customTXT flex-grow break-words whitespace-pre-wrap">
-            <div dangerouslySetInnerHTML={{__html: news?.text}}></div>
+            <div dangerouslySetInnerHTML={{ __html: processTextWithTooltips(news?.text)}} />
         </div>
         <div className="news-footer mt-8 flex justify-between items-center text-sm text-gray-300">
             <div className="font-semibold flex items-center text-gray-400">

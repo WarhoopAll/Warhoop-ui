@@ -1,9 +1,17 @@
-import { BrowserRouter } from 'react-router-dom';
+import {UserProvider} from "./context/UserContext";
 import AppRouter from "@/routes/appRouter";
+import {ApiStatusProvider} from "@/context/apiStatus";
+import useCustomToast from "@/components/forms/toast";
+
 export default function App() {
+    const { ToastWrapper } = useCustomToast();
+
     return (
-            <BrowserRouter>
-                <AppRouter />
-            </BrowserRouter>
+        <ApiStatusProvider>
+            <UserProvider>
+                <AppRouter/>
+                <ToastWrapper/>
+            </UserProvider>
+        </ApiStatusProvider>
     );
 }

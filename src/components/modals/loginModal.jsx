@@ -15,7 +15,7 @@ export default function LoginModal({t}) {
     const {updateSession, logout} = useContext(UserContext);
     const [loading, setLoading] = React.useState(false);
 
-    const { showToast } = useCustomToast();
+    const {showToast} = useCustomToast();
 
 
     const Send = async (e) => {

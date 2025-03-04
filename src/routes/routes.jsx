@@ -12,6 +12,10 @@ export const publicRoutes = [
         Component: Home
     },
     {
+        path: '/page/:pageNumber',
+        Component: Home
+    },
+    {
         path: '/news-post/:id',
         Component: News
     }

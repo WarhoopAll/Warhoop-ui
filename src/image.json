@@ -2,6 +2,9 @@
   "onlineImage": "/assets/icon/online.png",
   "offlineImage": "/assets/icon/offline.png",
   "accLvlImage": "/assets/icon/icon-acc-lvl.png",
+  "ru": "/assets/icons/flags/ru.png",
+  "en": "/assets/icons/flags/en.png",
+  "arrow":"/assets/icons/arrow_bottom.png",
   "factions": {
     "HordeImage": "/assets/factions/RaceTile-emblem-horde.92e86624e796446ef43ed3fe08f6d45f.png",
     "AllianceImage": "/assets/factions/RaceTile-emblem-alliance.fdb465cb222deb6db535f901ff2239c6.png",

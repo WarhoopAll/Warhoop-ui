@@ -1,16 +1,16 @@
 import Layout from "@/layouts/layout";
 import {useContext, useEffect, useState} from "react";
 import {GetNewsByID} from "@/utils/fetch/fetchActions";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import NewsCard from "@/partials/news/newsCard";
 import CommentCard from "@/partials/news/commentCard";
 import {UserContext} from "@/context/userContext";
 import {useTranslation} from "react-i18next";
 import useCustomToast from "@/components/forms/toast";
-import {Skeleton} from "@nextui-org/react";
 
 export default function News() {
     const {t} = useTranslation()
+    const navigate = useNavigate();
     const {session} = useContext(UserContext);
     const {id} = useParams();
     const [news, setNews] = useState(null);
@@ -27,6 +27,8 @@ export default function News() {
                     if (data?.status === 'success') {
                         setNews(data?.data);
                         setComments(data?.data?.comments || []);
+                    }else{
+                        navigate("/")
                     }
                 })
                 .finally(() => setLoading(false));
@@ -47,12 +49,7 @@ export default function News() {
     };
 
     return (<Layout>
-        {loading ? (<div className="flex flex-col min-h-[32vh] space-y-4">
-            <Skeleton
-                className="news-container bg-customBg rounded-lg border border-customBrown p-8 text-white shadow-lg min-h-[30vh] flex flex-col "></Skeleton>
-            <Skeleton className="news-comments-container mt-6 bg-customBg rounded-lg border border-customBrown p-6 text-white shadow-lg min-h-[20vh]"></Skeleton>
-
-        </div>) : (<>
+        <>
             <NewsCard
             news={news}
             session={session}
@@ -67,6 +64,6 @@ export default function News() {
             t={t}
             showToast={showToast}
         />
-        </>)}
+        </>
             </Layout>);
 }

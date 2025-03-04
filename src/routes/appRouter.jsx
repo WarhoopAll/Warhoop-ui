@@ -8,7 +8,7 @@ import NotFound from "@/pages/notFound";
 
 export default function AppRouter() {
     const location = useLocation();
-    const {isAuth, currentUser} = useContext(UserContext);
+    const {session, currentUser} = useContext(UserContext);
     const { isApiAvailable } = useApiStatus();
 
     if (!isApiAvailable) {
@@ -23,7 +23,7 @@ export default function AppRouter() {
 
     return (<>
             <Routes>
-                {isAuth && authRoutes.map(({path, Component}) => (
+                {session && authRoutes.map(({path, Component}) => (
                     <Route key={path} path={path} element={<Component/>} exact/>))}
                 {publicRoutes.map(({path, Component}) => (
                     <Route key={path} path={path} element={<Component/>} exact/>))}
