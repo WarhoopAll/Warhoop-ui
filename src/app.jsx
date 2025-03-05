@@ -1,4 +1,4 @@
-import {UserProvider} from "./context/UserContext";
+import {UserProvider} from "@/context/userContext";
 import AppRouter from "@/routes/appRouter";
 import {ApiStatusProvider} from "@/context/apiStatus";
 import useCustomToast from "@/components/forms/toast";

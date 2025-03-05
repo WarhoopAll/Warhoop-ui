@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: grimoire_ui
+    ports:
+      - "8282:80"
+    env_file:
+      - ../.env
+    networks:
+      - frontend_network
+
+networks:
+  frontend_network:
+    driver: bridge

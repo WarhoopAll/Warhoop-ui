@@ -70,7 +70,7 @@ export default function StatusServer() {
 
     const copyToClipboard = () => {
         if (serverStatus?.realmlis) {
-            navigator.clipboard.writeText(`set realmlist ${serverStatus.realmlis}`);
+            navigator.clipboard?.writeText(`set realmlist ${serverStatus.realmlis}`);
             showToast("Realmlist скопирован в буфер обмена!");
         }
     };

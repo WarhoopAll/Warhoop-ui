@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { formatDate } from "@/utils/formatDate";
 import { Image } from "@nextui-org/image";
 import { Tooltip, Button } from "@nextui-org/react";
-import ReactionButton from "@/components/forms/ReactionButton";
+import ReactionButton from "@/components/forms/reactionButton";
 import CommentReply from "@/partials/news/comment";
 import { FaEdit } from "@react-icons/all-files/fa/FaEdit";
 import ReportButton from "@/components/forms/reportButton";
